@@ -19,6 +19,7 @@ export interface ReactInstaStoriesProps {
     onStoryStart?: Function;
     onStoryEnd?: Function;
     keyboardNavigation?: boolean;
+    tapAndHoldToPause?: boolean;
 }
 
 export interface GlobalCtx {
@@ -39,6 +40,7 @@ export interface GlobalCtx {
     onStoryStart?: Function;
     onStoryEnd?: Function;
     keyboardNavigation?: boolean;
+    tapAndHoldToPause?: boolean;
 }
 
 export interface StoriesContext {

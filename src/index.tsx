@@ -23,7 +23,8 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         onStoryStart: props.onStoryStart,
         onStoryEnd: props.onStoryEnd,
         onAllStoriesEnd: props.onAllStoriesEnd,
-        keyboardNavigation: props.keyboardNavigation
+        keyboardNavigation: props.keyboardNavigation,
+        tapAndHoldToPause: props.tapAndHoldToPause
     }
     const [stories, setStories] = useState<{ stories: Story[] }>({ stories: generateStories(props.stories, renderers) });
     useEffect(() => {
@@ -58,7 +59,8 @@ const generateStories = (stories: Story[], renderers: { renderer: Renderer, test
 ReactInstaStories.defaultProps = {
     width: 360,
     height: 640,
-    defaultInterval: 4000
+    defaultInterval: 4000,
+    tapAndHoldToPause: true
 }
 
 export const WithHeader = withHeader;

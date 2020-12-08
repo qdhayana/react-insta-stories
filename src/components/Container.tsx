@@ -14,7 +14,7 @@ export default function () {
 
     let mousedownId = useRef<any>();
 
-    const { width, height, loop, currentIndex, isPaused, keyboardNavigation } = useContext<GlobalCtx>(GlobalContext);
+    const { width, height, loop, currentIndex, isPaused, keyboardNavigation, tapAndHoldToPause } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
@@ -63,6 +63,21 @@ export default function () {
     }
 
     const previous = () => {
+        if (loop) {
+            updatePreviousStoryIdForLoop()
+        } else {
+            updatePreviousStoryId()
+        }
+    }
+
+    const updatePreviousStoryIdForLoop = () => {
+        setCurrentIdWrapper(prev => {
+            if (prev == 0) return (stories.length - 1)
+            return prev - 1
+        })
+    }
+
+    const updatePreviousStoryId = () => {
         setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
     }
 
@@ -88,7 +103,9 @@ export default function () {
     const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
         e.preventDefault()
         mousedownId.current = setTimeout(() => {
-            toggleState('pause')
+            if (tapAndHoldToPause) {
+                toggleState('pause')
+            }
         }, 200)
     }
 
